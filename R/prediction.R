@@ -29,6 +29,7 @@ PredCellTypes <- function(object, species = 'human', model = '38CellTypes', use.
       use.cells <- intersect(x = use.cells, y = colnames(x = object@raw.data))
     }
   } else if(classOfObj == 'matrix'){
+    mat <- object
     if(is.null(x = use.cells)){
       use.cells <- colnames(x = object)
     } else{
@@ -50,14 +51,14 @@ PredCellTypes <- function(object, species = 'human', model = '38CellTypes', use.
   filename <- paste0(dirname, '.tar.gz')
   if(!dir.exists(paths = dirname)){
     if(!file.exists(filename)){
-      download.file(url = paste0('https://raw.githubusercontent.com/weilin-genomics/SuperCT/master/',
+      download.file(url = paste0('https://raw.githubusercontent.com/weilin-genomics/rSuperCT_models/blob/master/',
                                  model, '/', model, '.tar.gz'),
                     destfile = filename)
     } else{
       untar(tarfile = filename, exdir = results.dir)
     }
   }
-  all_files <- dir(path = dirname, full.names = TRUE)
+  all_files <- list.files(path = dirname, full.names = TRUE, recursive = TRUE)
   genes_file <- all_files[grep(pattern = 'genes.csv', x = all_files, perl = TRUE)][1]
   if(!file.exists(genes_file))
     stop('genes file missing.\n')
@@ -91,6 +92,7 @@ PredCellTypes <- function(object, species = 'human', model = '38CellTypes', use.
                     nrow = nrow(x = mat),
                     ncol = ncol(x = mat))
     mat <- mat + b_mat
+    mat[mat < 0] <- 0 #ReLU transformation
   }
   # get identity of each cell
   pred_types <- celltypes[max.col(m = t(x = mat)), 'celltype']

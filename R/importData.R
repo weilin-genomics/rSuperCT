@@ -1,7 +1,8 @@
 #' Import expression profiles from other object as object of class CellESet
 #' @param object An object of class \code{seurat}, \code{Seurat}, \code{matrix}(can be sparse) or \code{data.frame}
 #' in which rows represent for features and columns for cells.
-#' @importFrom methods new validObject as
+#' @importFrom methods new validObject
+#' @import Matrix
 #' @return
 #' An object of class CellESet(Cell Expression Set) with raw data stored in slot \code{raw.data}.
 #' @export
