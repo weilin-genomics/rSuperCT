@@ -18,7 +18,7 @@ myces # show the number of cells and features
 ```{r}
 dir.create('./models', showWarnings = FALSE)
 ###download and uncompress the model to ./models directory##
-myces <- PredCellTypes(myces, species = 'human', model = 'generic_38CellTypes', results.dir = './models')
+myces <- PredCellTypes(myces, species = 'human', model = 'generic_38celltypes', results.dir = './models')
 ####you can find the predictions under myces@meta.data$pred_types
 ```
 3) Visualize the predictive results for summarization.
