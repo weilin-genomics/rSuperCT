@@ -14,7 +14,7 @@ library(Seurat)
 myces <- ImportData(pbmc_small)
 myces # show the number of cells and features
 ```
-2) To predict cell types using pre-trained models, you can find the models from 'https://github.com/weilin-genomics/rSuperCT_models' that can be downloaded and uncompressed to the local 'models' directory. As prediction done, A column pred_types was saved in meta.data slot of your CellESet object. 'generic_38CellTypes' is the model you used for predictions.
+2) To predict cell types using pre-trained models, you can find the models from 'https://github.com/weilin-genomics/rSuperCT_models' that can be downloaded and uncompressed to the local 'models' directory. As prediction done, A column pred_types was saved in meta.data slot of your CellESet object. 'generic_38CellTypes' is the model you used for predictions. Make sure the model name is exactly the same as what shown in the rSuperCT_models. The letter case matters!!
 ```{r}
 dir.create('./models', showWarnings = FALSE)
 ###download and uncompress the model to ./models directory##
